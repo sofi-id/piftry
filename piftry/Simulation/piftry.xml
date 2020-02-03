@@ -1,0 +1,92 @@
+<CompuCell3D Revision="20180722" Version="3.7.8">
+   
+   <Potts>
+      
+      <!-- Basic properties of CPM (GGH) algorithm -->
+      <Dimensions x="70" y="70" z="1"/>
+      <Steps>10000</Steps>
+      <Temperature>10</Temperature>
+      <NeighborOrder>1</NeighborOrder>
+   </Potts>
+   
+   <Plugin Name="CellType">
+      
+      <!-- Listing all cell types in the simulation -->
+      <CellType TypeId="0" TypeName="Medium"/>
+      <CellType Freeze="" TypeId="1" TypeName="O"/>
+      <CellType Freeze="" TypeId="2" TypeName="G"/>
+      <CellType Freeze="" TypeId="3" TypeName="UD"/>
+      <CellType Freeze="" TypeId="4" TypeName="S"/>
+      <CellType Freeze="" TypeId="5" TypeName="OF"/>
+      <CellType Freeze="" TypeId="6" TypeName="OS"/>
+        
+   </Plugin>
+   
+   <Plugin Name="Volume"/>
+
+   <Plugin Name="CenterOfMass">
+      
+      <!-- Module tracking center of mass of each cell -->
+   </Plugin>
+
+      
+   
+   <Steppable Type="FlexibleDiffusionSolverFE">
+
+      <DiffusionField Name="Sactivator">
+         <SecretionData>
+            <Secretion Type="S">5</Secretion>
+
+         </SecretionData>
+        <DiffusionData>
+            <FieldName>Sactivator</FieldName>
+            <DiffusionConstant>0.16</DiffusionConstant>
+            <DecayConstant>8e-6</DecayConstant>
+            <DeltaT>1.0</DeltaT>
+            <DeltaX>1.0</DeltaX>
+        </DiffusionData>
+
+      </DiffusionField>
+      
+      
+       <DiffusionField Name="Firstinhibitor">
+         <SecretionData>
+            <Secretion Type="OS">0.5</Secretion>
+            
+            <Secretion Type="OF">3</Secretion>
+            <Secretion Type="S">3</Secretion>
+  
+         </SecretionData>
+       
+
+         <DiffusionData>
+            <FieldName>Firstinhibitor</FieldName>
+            <DiffusionConstant>0.16</DiffusionConstant>
+            <DecayConstant>0.01</DecayConstant>
+            <DeltaT>1.0</DeltaT>
+            <DeltaX>1.0</DeltaX>
+         </DiffusionData>
+
+      </DiffusionField> 
+       <DiffusionField Name="Secondinhibitor">
+         <SecretionData>
+            <Secretion Type="S">0.5</Secretion>
+            <Secretion Type="OF">0.5</Secretion>
+            
+            <Secretion Type="OS">3</Secretion>
+            
+         </SecretionData>
+       
+
+         <DiffusionData>
+            <FieldName>Secondinhibitor</FieldName>
+            <DiffusionConstant>0.16</DiffusionConstant>
+            <DecayConstant>0.01</DecayConstant>
+            <DeltaT>1.0</DeltaT>
+            <DeltaX>1.0</DeltaX>
+         </DiffusionData>
+
+
+      </DiffusionField> 
+   </Steppable>
+ </Compucell3D>
